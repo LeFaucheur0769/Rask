@@ -35,17 +35,20 @@ def crypt(lettre,keyVar):
         elif lettre == alpha[i].upper():
             encrypted = encrypted + keyVar[i].upper()
         elif (lettre not in alpha) == True and (lettre not in alpha.upper()) == True :
-            encrypted = encrypted + lettre
+            if i == 1:
+                encrypted = encrypted + lettre
 
 def decrypt(lettre,keyVar):
     global decrypted
-    for i in range(len(keyVar)):
-        if lettre == keyVar[i]:
-            decrypted = decrypted + alpha[i]
-        elif lettre == keyVar[i].upper():
-            decrypted = decrypted + alpha[i].upper()
-        elif (lettre not in keyVar) == True and (lettre not in keyVar.upper()) == True : """and i >="""
-            decrypted = decrypted + lettre
+    if (lettre not in keyVar) == True and (lettre not in keyVar.upper()) == True :
+        decrypted = decrypted + lettre
+    else:
+        for i in range(len(keyVar)):
+            if lettre == keyVar[i]:
+                decrypted = decrypted + alpha[i]
+            elif lettre == keyVar[i].upper():
+                decrypted = decrypted + alpha[i].upper()
+
 
 
 
@@ -66,7 +69,7 @@ while cryptOrDecrypt != "q":
     elif cryptOrDecrypt == "d" :
         textD = input("\n\tVeuillez écrire votre message a décrypter ici : ")
         print("\n\tDécryption en cours ", ".", ".",".",".")
-        for i in range(len(textC)):
+        for i in range(len(textD)):
             decrypt(textD[i], key)
         time.sleep(0.5)
         print("\n\n")
