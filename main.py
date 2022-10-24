@@ -1,9 +1,11 @@
 import time
 ##
 
-alpha = "abcdefghijklmnopqrstuvwxyz 0123456789&é'(-è_çà)= " ##the aplha
-key = "qeyfmchoganlujxwbtkrzbvips 0123456789&é'(-è_çà)= "   ##the alpha key
-keyListTest = []
+alpha = "abcdefghijklmnopqrstuvwxyz 0123456789&é'(-è_çà)=" ##the aplha
+key = "qeyfmchoganlujxwbtkrzbvips 0123456789&é'(-è_çà)="   ##the alpha key
+keyList = [""]
+alphaList = [""]
+
 ##
 
 ##
@@ -19,6 +21,12 @@ cryptOrDecrypt = "c"
 
 ##
 
+
+alphaList = alpha.split()
+    
+
+keyList = key.split()
+
 def crypt(lettre,keyVar):
     global encrypted
     for i in range(len(alpha)):
@@ -26,6 +34,8 @@ def crypt(lettre,keyVar):
             encrypted = encrypted + keyVar[i]
         elif lettre == alpha[i].upper():
             encrypted = encrypted + keyVar[i].upper()
+        elif (lettre not in alpha) == True and (lettre not in alpha.upper()) == True :
+            encrypted = encrypted + lettre
 
 def decrypt(lettre,keyVar):
     global decrypted
@@ -34,12 +44,15 @@ def decrypt(lettre,keyVar):
             decrypted = decrypted + alpha[i]
         elif lettre == keyVar[i].upper():
             decrypted = decrypted + alpha[i].upper()
+        elif (lettre not in keyVar) == True and (lettre not in keyVar.upper()) == True:
+            decrypted = decrypted + lettre
+        
             
             
         
-
+print("\n\n\n\n\t\t\tVoici le traducteur raskayen 1.0\t\t\t\n\n\n")
 while cryptOrDecrypt != "q":    
-    print("\n\n\n\n\t\t\tVoici le traducteur raskayen 1.0\t\t\t\n\n\n")
+    
     cryptOrDecrypt = input("\tVoulez vous crypter (c) ou décrypter (d) ou quitter (q) : ")
     if cryptOrDecrypt == "c": 
         textC = input("\n\tVeuillez écrire votre message a crypter ici : ")
